@@ -1,0 +1,26 @@
+Pipeline {
+    
+    agent any
+    
+    tools {
+        maven "Maven3"
+    }    
+       
+        stages {
+            
+            stage("checkout") {
+                steps {
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '909f81e4-5565-4a3e-b76b-88767c07d0d4', url: 'https://github.com/abekwu/myRepoForJavaApp2']])
+                }
+            }
+            
+            stage("build") {
+                steps {
+                    sh 'mvn clean install -f MyWebApp/pom.xml'
+                }
+            }   
+            
+        }
+    }
+    
+}
